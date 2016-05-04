@@ -65,7 +65,10 @@ static NSString * const recipeTableViewController = @"RecipeTableViewController"
     
     Recipe *recipe = [self.recipes objectAtIndex:indexPath.row];
     
-//    cell.recipeImageView.image = [UIImage imageNamed:@""];
+    if (!cell.recipeImageView.image) {
+        cell.recipeImageView.image = [UIImage imageNamed:@"placeholder"];
+    }
+    
     [self.APIManager fetchImageFromURL:recipe.imageURL withCompletion:^(NSError * _Nullable error, UIImage * _Nullable image) {
         if (!error && image) {
             recipe.image = image;
